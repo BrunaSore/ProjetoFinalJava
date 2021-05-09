@@ -3,9 +3,9 @@ package Pessoas;
 import java.time.LocalDate;
 
 public abstract class Pessoa {
-	String nome;
-	String cpf;
-	LocalDate dataNasc;
+	protected String nome;
+	protected String cpf;
+	protected LocalDate dataNasc;
 	
 	
 	public Pessoa() {

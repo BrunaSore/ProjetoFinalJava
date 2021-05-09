@@ -4,11 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Funcionarios extends Pessoa {
-	double salarioBruto;
+import FuncoesCalculo.AliquotasDeducoes;
+import FuncoesCalculo.Calculos;
+
+public class Funcionarios extends Pessoa implements Calculos {
+	protected double salarioBruto;
+	protected double descontoInss;
+	protected double descontoIR;
+	protected double salarioLiquido;
+	protected double numeroDependentes = 189.59;
+
 	List<Dependentes> listaDependentes = new ArrayList<>();
 
-	
 	public Funcionarios() {
 	}
 
@@ -41,4 +48,54 @@ public class Funcionarios extends Pessoa {
 		this.listaDependentes = listaDependentes;
 	}
 
+	@Override
+	public double calculoINSS() {
+		if (salarioBruto <= 1100) {
+			return descontoInss = (salarioBruto * AliquotasDeducoes.ALIQUOTAINSS.getA())
+					- AliquotasDeducoes.DEDUCAOINSS.getA();
+		} else if (salarioBruto > 1100 && salarioBruto <= 2203.48) {
+			return descontoInss = (salarioBruto * AliquotasDeducoes.ALIQUOTAINSS.getB())
+					- AliquotasDeducoes.DEDUCAOINSS.getB();
+		} else if (salarioBruto > 2203.48 && salarioBruto <= 3305.22) {
+			return descontoInss = (salarioBruto * AliquotasDeducoes.ALIQUOTAINSS.getC())
+					- AliquotasDeducoes.DEDUCAOINSS.getC();
+		} else if (salarioBruto > 3305.23 && salarioBruto <= 6433.57) {
+			return descontoInss = (salarioBruto * AliquotasDeducoes.ALIQUOTAINSS.getD())
+					- AliquotasDeducoes.DEDUCAOINSS.getD();
+		} else {
+			return descontoInss = (6433.57 * AliquotasDeducoes.ALIQUOTAINSS.getD())
+					- AliquotasDeducoes.DEDUCAOINSS.getD();
+		}
+	}
+
+	@Override
+	public double calculoIR() {
+		if (salarioBruto <= 1903.98) {
+			return descontoIR = 0;
+		} else if (salarioBruto > 1903.98 && salarioBruto < 2826.65) {
+			return descontoIR = ((salarioBruto - numeroDependentes - descontoInss)
+					* AliquotasDeducoes.ALIQUOTAIR.getA()) - AliquotasDeducoes.DEDUCAOIR.getA();
+		} else if (salarioBruto > 2826.65 && salarioBruto <= 3751.05) {
+			return descontoIR = ((salarioBruto - numeroDependentes - descontoInss)
+					* AliquotasDeducoes.ALIQUOTAIR.getB()) - AliquotasDeducoes.DEDUCAOIR.getB();
+		} else if (salarioBruto > 3751.05 && salarioBruto <= 4664.68) {
+			return descontoIR = ((salarioBruto - numeroDependentes - descontoInss)
+					* AliquotasDeducoes.ALIQUOTAIR.getC()) - AliquotasDeducoes.DEDUCAOIR.getC();
+		} else {
+			return descontoIR = ((salarioBruto - numeroDependentes - descontoInss)
+					* AliquotasDeducoes.ALIQUOTAIR.getD()) - AliquotasDeducoes.DEDUCAOIR.getD();
+		}
+	}
+
+	@Override
+	public double calculoSalario() {
+
+		return salarioLiquido = salarioBruto - descontoInss - descontoIR;
+	}
+
+	@Override
+	public void addDep() {
+		numeroDependentes = numeroDependentes * listaDependentes.size();
+
+	}
 }
