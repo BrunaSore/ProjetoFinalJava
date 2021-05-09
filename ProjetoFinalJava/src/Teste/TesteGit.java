@@ -1,27 +1,38 @@
 package Teste;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
+import Dados.Escrita;
 import Dados.Leitura;
-import Pessoas.Dependentes;
 import Pessoas.Funcionarios;
 
 public class TesteGit {
 	public static void main(String[] args) throws IOException {
-		//Como usar a função de leitura
-		List<Funcionarios> listaFuncionarios = new ArrayList<>();
-		List<Dependentes> listaDependentes = new ArrayList<>();
-		listaFuncionarios = Leitura.leitorPessoas();
-		for (int i = 0; i < listaFuncionarios.size(); i++) {
-			System.out.println("Funcionário: " + listaFuncionarios.get(i).getNome());
-			listaDependentes = listaFuncionarios.get(i).getListaDependentes();
-		for(int j = 0; j < listaDependentes.size(); j++) {
-			System.out.println("Dependente: " + listaDependentes.get(j).getNome());
-
+		Scanner scan = new Scanner(System.in);
+		String nomeArquivoEntrada;
+		String nomeArquivoSaida;
+		
+		List<Funcionarios> funcionarios = new ArrayList<>();
+		
+		boolean continua = true;
+		System.out.println("Digite o nome do arquivo de entrada: ");
+		nomeArquivoEntrada = scan.nextLine();
+		while(continua) {
+			try {
+				funcionarios = Leitura.leitorPessoas(nomeArquivoEntrada);
+				continua = false;
+			} catch(FileNotFoundException ex) {
+				System.out.println("Arquivo não encontrado. Sugestão: Pessoas.csv.");
+				nomeArquivoEntrada = scan.nextLine();
+			}
 		}
-		System.out.println("\n");
-		}
+		System.out.println("Digite o nome do arquivo de saída: ");
+		nomeArquivoSaida = scan.nextLine();
+		Escrita.escritaFuncionarios(nomeArquivoSaida, funcionarios);
+		
 	}
 }

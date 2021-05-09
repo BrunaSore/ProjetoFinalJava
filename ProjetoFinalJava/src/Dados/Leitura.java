@@ -13,8 +13,8 @@ import Pessoas.Funcionarios;
 
 public class Leitura {
 
-	public static List<Funcionarios> leitorPessoas() throws IOException {
-		BufferedReader leitor = new BufferedReader(new FileReader("./src/Arquivos/Pessoas.csv"));
+	public static List<Funcionarios> leitorPessoas(String nomeArquivo) throws IOException {
+		BufferedReader leitor = new BufferedReader(new FileReader("./src/Arquivos/" + nomeArquivo));
 
 		
 		String linha = "";
@@ -22,14 +22,13 @@ public class Leitura {
 		
 		List<Funcionarios> listaFuncionarios = new ArrayList<>();
 		List<Dependentes> listaDependentes = new ArrayList<>();
-		List<Dependentes> listaDependentesPorFunc = new ArrayList<>();
 		Funcionarios funcionario = new Funcionarios();
 		while (true) {
 			
 			linha = leitor.readLine();
 			
 			if(linha == null) {
-				funcionario.setListaDependentes(listaDependentesPorFunc);
+				funcionario.setListaDependentes(listaDependentes);
 				listaFuncionarios.add(funcionario);
 				break;
 			}
