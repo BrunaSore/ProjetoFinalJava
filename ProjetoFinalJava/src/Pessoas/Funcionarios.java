@@ -48,6 +48,38 @@ public class Funcionarios extends Pessoa implements Calculos {
 		this.listaDependentes = listaDependentes;
 	}
 
+	public double getDescontoInss() {
+		return descontoInss;
+	}
+
+	public void setDescontoInss(double descontoInss) {
+		this.descontoInss = descontoInss;
+	}
+
+	public double getDescontoIR() {
+		return descontoIR;
+	}
+
+	public void setDescontoIR(double descontoIR) {
+		this.descontoIR = descontoIR;
+	}
+
+	public double getSalarioLiquido() {
+		return salarioLiquido;
+	}
+
+	public void setSalarioLiquido(double salarioLiquido) {
+		this.salarioLiquido = salarioLiquido;
+	}
+
+	public double getNumeroDependentes() {
+		return numeroDependentes;
+	}
+
+	public void setNumeroDependentes(double numeroDependentes) {
+		this.numeroDependentes = numeroDependentes;
+	}
+
 	@Override
 	public double calculoINSS() {
 		if (salarioBruto <= 1100) {

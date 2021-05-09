@@ -36,17 +36,11 @@ public class TesteMain {
 		System.out.println("Digite o nome do arquivo de saída: ");
 		nomeArquivoSaida = scan.nextLine();
 		
-		double testeInss = 0;
-		double testeIr = 0;
-		double testeSal = 0;
-		
 		for (int i = 0; i < funcionarios.size(); i++) {
 			funcionarios.get(i).addDep();
-			testeInss = funcionarios.get(i).calculoINSS();
-			testeIr = funcionarios.get(i).calculoIR();
-			testeSal = funcionarios.get(i).calculoSalario();
-			BigDecimal bd = new BigDecimal(testeSal).setScale(2, RoundingMode.HALF_EVEN);
-			testeSal = bd.doubleValue();
+			funcionarios.get(i).calculoINSS();
+			funcionarios.get(i).calculoIR();
+			funcionarios.get(i).calculoSalario();
 		}
 		
 		Escrita.escritaFuncionarios(nomeArquivoSaida, funcionarios);
