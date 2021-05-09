@@ -13,7 +13,7 @@ import Pessoas.Funcionarios;
 
 public class Leitura {
 
-	public static void leitorPessoas() throws IOException {
+	public static List<Funcionarios> leitorPessoas() throws IOException {
 		BufferedReader leitor = new BufferedReader(new FileReader("./src/Arquivos/Pessoas.csv"));
 
 		
@@ -22,34 +22,47 @@ public class Leitura {
 		
 		List<Funcionarios> listaFuncionarios = new ArrayList<>();
 		List<Dependentes> listaDependentes = new ArrayList<>();
-
+		List<Dependentes> listaDependentesPorFunc = new ArrayList<>();
+		Funcionarios funcionario = new Funcionarios();
 		while (true) {
 			
 			linha = leitor.readLine();
 			
 			if(linha == null) {
+				funcionario.setListaDependentes(listaDependentesPorFunc);
+				listaFuncionarios.add(funcionario);
 				break;
 			}
+			
+			
 			if (!linha.isEmpty()) {
 				String[] campos = linha.split(";");
 				if(campos[3].equalsIgnoreCase("sobrinho") || campos[3].equalsIgnoreCase("filho") || campos[3].equalsIgnoreCase("outros")) {
 					DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyyMMdd");
 					LocalDate data = LocalDate.parse(campos[2], formato);
 					Dependentes dependente = new Dependentes(campos[0], campos[1], data, campos[3]);
+					listaDependentes = funcionario.getListaDependentes();
 					listaDependentes.add(dependente);
-					System.out.println("Dependente: " + dependente.getNome());
-					
 				} else {
+					
 					DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyyMMdd");
 					LocalDate data = LocalDate.parse(campos[2], formato);
-					Funcionarios funcionario = new Funcionarios(campos[0], campos[1], data, Double.parseDouble(campos[3]));
-					listaFuncionarios.add(funcionario);
-					System.out.println("Funcionário: " + funcionario.getNome());
+					funcionario = new Funcionarios();
+					funcionario.setNome(campos[0]);
+					funcionario.setCpf(campos[1]);
+					funcionario.setDataNasc(data);
+					funcionario.setSalarioBruto(Double.parseDouble(campos[3]));
+					
 				}
-			} 		
+			} else if (linha.isEmpty()) {
+				funcionario.setListaDependentes(listaDependentes);
+				listaFuncionarios.add(funcionario);
+					
+			}
 		
 		}
+		
 		leitor.close();
+		return listaFuncionarios;
 	}
-
 }

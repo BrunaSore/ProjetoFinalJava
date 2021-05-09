@@ -7,6 +7,11 @@ public abstract class Pessoa {
 	String cpf;
 	LocalDate dataNasc;
 	
+	
+	public Pessoa() {
+		super();
+	}
+
 	public Pessoa(String nome, String cpf, LocalDate dataNasc) {
 		super();
 		this.nome = nome;
