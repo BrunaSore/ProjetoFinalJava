@@ -38,9 +38,9 @@ public class TesteMain {
 		
 		for (int i = 0; i < funcionarios.size(); i++) {
 			funcionarios.get(i).addDep();
-			funcionarios.get(i).calculoINSS();
-			funcionarios.get(i).calculoIR();
-			funcionarios.get(i).calculoSalario();
+			String.format("%.2f",funcionarios.get(i).calculoINSS());
+			String.format("%.2f",funcionarios.get(i).calculoIR());
+			String.format("%.2f",funcionarios.get(i).calculoSalario());
 		}
 		
 		Escrita.escritaFuncionarios(nomeArquivoSaida, funcionarios);
