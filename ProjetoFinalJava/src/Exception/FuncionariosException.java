@@ -1,5 +1,6 @@
 package Exception;
 
-public class FuncionariosException {
+public class FuncionariosException extends RunTimeException{
 
+	
 }
