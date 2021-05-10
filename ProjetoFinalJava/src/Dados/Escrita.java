@@ -35,7 +35,9 @@ public class Escrita {
 			ir = bd.doubleValue();
 			bd = new BigDecimal(listaFuncionarios.get(i).getDescontoInss()).setScale(2, RoundingMode.HALF_EVEN);
 			inss = bd.doubleValue();
-			linha =listaFuncionarios.get(i).getNome() + ";" + listaFuncionarios.get(i).getCpf() + ";" + ir + ";" + inss + ";" + salarioLiquido + ";" ;
+			String.format("%.2f",inss);
+
+			linha =listaFuncionarios.get(i).getNome() + ";" + listaFuncionarios.get(i).getCpf() + ";" + String.format("%.2f",ir) + ";" + String.format("%.2f",inss) + ";" + String.format("%.2f",salarioLiquido) + ";" ;
 			escritor.append(linha + "\n");
 		}
 		
