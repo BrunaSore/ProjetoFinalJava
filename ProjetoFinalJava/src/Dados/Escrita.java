@@ -14,9 +14,6 @@ import Pessoas.Dependentes;
 import Pessoas.Funcionarios;
 
 public class Escrita {
-	static double  salarioLiquido = 0;
-	static double ir = 0;
-	static double inss = 0;
 
 	public static void escritaFuncionarios(String nomeArquivo, List<Funcionarios> funcionarios) throws IOException {
 		String caminhoPadrao = "./src/Arquivos/ArquivosEscrita/";
@@ -28,16 +25,10 @@ public class Escrita {
 		String linha;
 		List<Funcionarios> listaFuncionarios = new ArrayList<>();
 		listaFuncionarios = funcionarios;
+		linha = "Nome do Funcionário;CPF;IR;INSS;Salário Líquido;";
+		escritor.append(linha + "\n");
 		for (int i = 0; i < listaFuncionarios.size(); i++) {			
-			BigDecimal bd = new BigDecimal(listaFuncionarios.get(i).getSalarioLiquido()).setScale(2, RoundingMode.HALF_EVEN);
-			salarioLiquido = bd.doubleValue();
-			bd = new BigDecimal(listaFuncionarios.get(i).getDescontoIR()).setScale(2, RoundingMode.HALF_EVEN);
-			ir = bd.doubleValue();
-			bd = new BigDecimal(listaFuncionarios.get(i).getDescontoInss()).setScale(2, RoundingMode.HALF_EVEN);
-			inss = bd.doubleValue();
-			String.format("%.2f",inss);
-
-			linha =listaFuncionarios.get(i).getNome() + ";" + listaFuncionarios.get(i).getCpf() + ";" + String.format("%.2f",ir) + ";" + String.format("%.2f",inss) + ";" + String.format("%.2f",salarioLiquido) + ";" ;
+			linha =listaFuncionarios.get(i).getNome() + ";" + listaFuncionarios.get(i).getCpf() + ";" + String.format("%.2f",listaFuncionarios.get(i).getDescontoIR()) + ";" + String.format("%.2f",listaFuncionarios.get(i).getDescontoInss()) + ";" + String.format("%.2f",listaFuncionarios.get(i).getSalarioLiquido()) + ";" ;
 			escritor.append(linha + "\n");
 		}
 		

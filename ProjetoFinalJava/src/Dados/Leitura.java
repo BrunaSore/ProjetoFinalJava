@@ -8,12 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exception.CpfException;
 import Pessoas.Dependentes;
 import Pessoas.Funcionarios;
 
 public class Leitura {
 
-	public static List<Funcionarios> leitorPessoas(String nomeArquivo) throws IOException {
+	public static List<Funcionarios> leitorPessoas(String nomeArquivo) throws IOException, CpfException {
 		BufferedReader leitor = new BufferedReader(new FileReader("./src/Arquivos/" + nomeArquivo));
 
 		

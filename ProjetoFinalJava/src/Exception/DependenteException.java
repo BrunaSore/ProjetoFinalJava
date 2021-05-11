@@ -16,6 +16,12 @@ public class DependenteException extends RuntimeException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public DependenteException(String nome, int idade) {
+		super();
+		System.out.println("\nO dependente: " + nome + ", possui " + idade + " anos. \nNão são permitidos dependentes maiores de 18 anos.\nFalha ao exportar arquivo.\n\n");
+		// TODO Auto-generated constructor stub
+	}
 
 	public DependenteException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);

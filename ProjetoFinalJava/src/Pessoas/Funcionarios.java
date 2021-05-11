@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exception.CpfException;
 import FuncoesCalculo.AliquotasDeducoes;
 import FuncoesCalculo.Calculos;
 
@@ -19,14 +20,14 @@ public class Funcionarios extends Pessoa implements Calculos {
 	public Funcionarios() {
 	}
 
-	public Funcionarios(String nome, String cpf, LocalDate dataNasc, double salarioBruto) {
+	public Funcionarios(String nome, String cpf, LocalDate dataNasc, double salarioBruto) throws CpfException {
 		super(nome, cpf, dataNasc);
 		this.salarioBruto = salarioBruto;
 
 	}
 
 	public Funcionarios(String nome, String cpf, LocalDate dataNasc, double salarioBruto,
-			List<Dependentes> listaDependentes) {
+			List<Dependentes> listaDependentes) throws CpfException {
 		super(nome, cpf, dataNasc);
 		this.salarioBruto = salarioBruto;
 		this.listaDependentes = listaDependentes;

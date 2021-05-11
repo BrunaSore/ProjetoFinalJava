@@ -11,10 +11,11 @@ import java.util.Scanner;
 
 import Dados.Escrita;
 import Dados.Leitura;
+import Exception.CpfException;
 import Pessoas.Funcionarios;
 
 public class TesteMain {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, CpfException {
 		Scanner scan = new Scanner(System.in);
 		String nomeArquivoEntrada;
 		String nomeArquivoSaida;
@@ -44,6 +45,8 @@ public class TesteMain {
 		}
 		
 		Escrita.escritaFuncionarios(nomeArquivoSaida, funcionarios);
-		
+		System.out.println("\nArquivo exportado com sucesso!");
+
+		scan.close();
 	}
 }
