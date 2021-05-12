@@ -12,7 +12,7 @@ public class Dependentes extends Pessoa{
 	public Dependentes(String nome, String cpf, LocalDate dataNasc, String parentesco) throws CpfException {
 		super(nome, cpf, dataNasc);
 		LocalDate dataHoje = LocalDate.now();
-		if (Period.between(dataNasc, dataHoje).getYears() > 18) {
+		if (Period.between(dataNasc, dataHoje).getYears() >= 18) {
 			throw new DependenteException(nome, Period.between(dataNasc, dataHoje).getYears());
 		}
 		this.parentesco = parentesco;
