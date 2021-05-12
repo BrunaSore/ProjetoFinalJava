@@ -30,11 +30,15 @@ public class TesteMain {
 				funcionarios = Leitura.leitorPessoas(nomeArquivoEntrada);
 				continua = false;
 			} catch(FileNotFoundException ex) {
-				System.out.println("\nArquivo não encontrado. Sugestão: Pessoas.csv.");
+				System.out.println("\n-----------------------------------------------------");
+				System.out.println("Arquivo não encontrado. Sugestão: Pessoas.csv");
+				System.out.println("-----------------------------------------------------");
+				
+				System.out.print("\nTente novamente: ");
 				nomeArquivoEntrada = scan.nextLine();
 			}
 		}
-		System.out.print("\nDigite o nome do arquivo de saída: ");
+		System.out.print("Digite o nome do arquivo de saída: ");
 		nomeArquivoSaida = scan.nextLine();
 		
 		for (int i = 0; i < funcionarios.size(); i++) {
@@ -45,7 +49,7 @@ public class TesteMain {
 		}
 		
 		Escrita.escritaFuncionarios(nomeArquivoSaida, funcionarios);
-		System.out.print("\nArquivo exportado com sucesso!");
+		System.out.print("\nArquivo exportado com sucesso! \nAcesse em Arquivos/ArquivosEscrita.");
 
 		scan.close();
 	}
